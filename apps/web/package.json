@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.4",
-    "@repo/database": "*",
-    "@repo/rabbit-mq": "*",
-    "@repo/ui": "*",
+  "@repo/database": "workspace:*",
+    "@repo/rabbit-mq": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.2.1",
     "@tanstack/react-query": "^5.90.21",
     "next": "16.1.5",
