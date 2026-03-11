@@ -15,8 +15,6 @@ RUN npm ci
 RUN npx turbo run build --filter=@repo/database
 
 # Build the web app (produces .next/standalone)
-# Provide dummy DATABASE_URL so Prisma client doesn't throw during static page collection
-ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
 RUN npx turbo run build --filter=web
 
 # ── Production runner ─────────────────────────────────────────
