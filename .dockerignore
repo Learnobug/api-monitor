@@ -1,0 +1,9 @@
+node_modules
+.git
+.gitignore
+**/.next
+**/dist
+**/.turbo
+**/node_modules
+*.md
+.env*
