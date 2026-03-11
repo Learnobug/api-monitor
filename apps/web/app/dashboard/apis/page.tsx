@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useApis, useDeleteApi, useTriggerCheckAll } from "../../hooks/use-apis";
 import { StatusBadge } from "../../components/status-badge";
 
-export default function ApisListPage() {
+function ApisListContent() {
   const { data: apis, isLoading } = useApis();
   const deleteApi = useDeleteApi();
   const checkAll = useTriggerCheckAll();
@@ -152,5 +152,19 @@ export default function ApisListPage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function ApisListPage() {
+  return (
+    <Suspense fallback={
+      <div className="animate-pulse space-y-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="bg-white rounded-xl border border-gray-200 h-20" />
+        ))}
+      </div>
+    }>
+      <ApisListContent />
+    </Suspense>
   );
 }
