@@ -1,6 +1,6 @@
 # API Monitor
 
-A full-stack, real-time **API monitoring application** built as a Turborepo monorepo. It lets you register HTTP endpoints, monitor their health on a configurable schedule, view response-time analytics, and receive email alerts when things go wrong.
+A full-stack, real-time **API monitoring application** built as a Turborepo monorepo. It lets you register HTTP endpoints, monitor their health on a configurable schedule, view response-time analytics, and receive email alerts when things go wrong. 
 
 ---
 
