@@ -1,0 +1,24 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file=.env --import tsx run-all.ts",
+    "dev:alerts": "node --env-file=.env --import tsx alert-consumer.ts",
+    "dev:all": "node --env-file=.env --import tsx run-all.ts"
+  },
+  "dependencies": {
+    "@repo/database": "*",
+    "@repo/rabbit-mq": "*",
+    "node-mailjet": "^6.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "5.9.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
