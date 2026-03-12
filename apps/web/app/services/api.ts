@@ -79,11 +79,16 @@ export async function fetchAlertLogs(): Promise<AlertLog[]> {
   return res.json();
 }
 
-export async function verifyEndpoint(url: string, method: string): Promise<{ reachable: boolean; status?: number; statusText?: string; error?: string }> {
+export async function verifyEndpoint(
+  url: string,
+  method: string,
+  body?: string,
+  bodyType?: string
+): Promise<{ reachable: boolean; status?: number; statusText?: string; error?: string }> {
   const res = await fetch("/api/apis/verify", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url, method }),
+    body: JSON.stringify({ url, method, body, bodyType }),
   });
   return res.json();
 }

@@ -82,6 +82,7 @@ export const ApiEndpointScalarFieldEnum = {
   method: 'method',
   headers: 'headers',
   body: 'body',
+  bodyType: 'bodyType',
   expectedStatus: 'expectedStatus',
   timeout: 'timeout',
   frequency: 'frequency',

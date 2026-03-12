@@ -27,6 +27,10 @@ async function tick() {
         url: endpoint.url,
         monitorID: endpoint.monitorId,
         trigger: "cron",
+        method: endpoint.method,
+        body: endpoint.body,
+        bodyType: endpoint.bodyType,
+        headers: endpoint.headers,
       });
 
       // Update lastChecked so we don't re-enqueue on the next tick

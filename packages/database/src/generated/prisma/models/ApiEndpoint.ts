@@ -50,6 +50,7 @@ export type ApiEndpointMinAggregateOutputType = {
   url: string | null
   method: string | null
   body: string | null
+  bodyType: string | null
   expectedStatus: number | null
   timeout: number | null
   frequency: number | null
@@ -69,6 +70,7 @@ export type ApiEndpointMaxAggregateOutputType = {
   url: string | null
   method: string | null
   body: string | null
+  bodyType: string | null
   expectedStatus: number | null
   timeout: number | null
   frequency: number | null
@@ -89,6 +91,7 @@ export type ApiEndpointCountAggregateOutputType = {
   method: number
   headers: number
   body: number
+  bodyType: number
   expectedStatus: number
   timeout: number
   frequency: number
@@ -126,6 +129,7 @@ export type ApiEndpointMinAggregateInputType = {
   url?: true
   method?: true
   body?: true
+  bodyType?: true
   expectedStatus?: true
   timeout?: true
   frequency?: true
@@ -145,6 +149,7 @@ export type ApiEndpointMaxAggregateInputType = {
   url?: true
   method?: true
   body?: true
+  bodyType?: true
   expectedStatus?: true
   timeout?: true
   frequency?: true
@@ -165,6 +170,7 @@ export type ApiEndpointCountAggregateInputType = {
   method?: true
   headers?: true
   body?: true
+  bodyType?: true
   expectedStatus?: true
   timeout?: true
   frequency?: true
@@ -272,6 +278,7 @@ export type ApiEndpointGroupByOutputType = {
   method: string
   headers: runtime.JsonValue | null
   body: string | null
+  bodyType: string | null
   expectedStatus: number
   timeout: number
   frequency: number
@@ -315,6 +322,7 @@ export type ApiEndpointWhereInput = {
   method?: Prisma.StringFilter<"ApiEndpoint"> | string
   headers?: Prisma.JsonNullableFilter<"ApiEndpoint">
   body?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
+  bodyType?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
   expectedStatus?: Prisma.IntFilter<"ApiEndpoint"> | number
   timeout?: Prisma.IntFilter<"ApiEndpoint"> | number
   frequency?: Prisma.IntFilter<"ApiEndpoint"> | number
@@ -337,6 +345,7 @@ export type ApiEndpointOrderByWithRelationInput = {
   method?: Prisma.SortOrder
   headers?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  bodyType?: Prisma.SortOrderInput | Prisma.SortOrder
   expectedStatus?: Prisma.SortOrder
   timeout?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
@@ -362,6 +371,7 @@ export type ApiEndpointWhereUniqueInput = Prisma.AtLeast<{
   method?: Prisma.StringFilter<"ApiEndpoint"> | string
   headers?: Prisma.JsonNullableFilter<"ApiEndpoint">
   body?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
+  bodyType?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
   expectedStatus?: Prisma.IntFilter<"ApiEndpoint"> | number
   timeout?: Prisma.IntFilter<"ApiEndpoint"> | number
   frequency?: Prisma.IntFilter<"ApiEndpoint"> | number
@@ -384,6 +394,7 @@ export type ApiEndpointOrderByWithAggregationInput = {
   method?: Prisma.SortOrder
   headers?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  bodyType?: Prisma.SortOrderInput | Prisma.SortOrder
   expectedStatus?: Prisma.SortOrder
   timeout?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
@@ -412,6 +423,7 @@ export type ApiEndpointScalarWhereWithAggregatesInput = {
   method?: Prisma.StringWithAggregatesFilter<"ApiEndpoint"> | string
   headers?: Prisma.JsonNullableWithAggregatesFilter<"ApiEndpoint">
   body?: Prisma.StringNullableWithAggregatesFilter<"ApiEndpoint"> | string | null
+  bodyType?: Prisma.StringNullableWithAggregatesFilter<"ApiEndpoint"> | string | null
   expectedStatus?: Prisma.IntWithAggregatesFilter<"ApiEndpoint"> | number
   timeout?: Prisma.IntWithAggregatesFilter<"ApiEndpoint"> | number
   frequency?: Prisma.IntWithAggregatesFilter<"ApiEndpoint"> | number
@@ -432,6 +444,7 @@ export type ApiEndpointCreateInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -454,6 +467,7 @@ export type ApiEndpointUncheckedCreateInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -476,6 +490,7 @@ export type ApiEndpointUpdateInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -498,6 +513,7 @@ export type ApiEndpointUncheckedUpdateInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -520,6 +536,7 @@ export type ApiEndpointCreateManyInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -540,6 +557,7 @@ export type ApiEndpointUpdateManyMutationInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -560,6 +578,7 @@ export type ApiEndpointUncheckedUpdateManyInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -580,6 +599,7 @@ export type ApiEndpointCountOrderByAggregateInput = {
   method?: Prisma.SortOrder
   headers?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  bodyType?: Prisma.SortOrder
   expectedStatus?: Prisma.SortOrder
   timeout?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
@@ -607,6 +627,7 @@ export type ApiEndpointMaxOrderByAggregateInput = {
   url?: Prisma.SortOrder
   method?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  bodyType?: Prisma.SortOrder
   expectedStatus?: Prisma.SortOrder
   timeout?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
@@ -626,6 +647,7 @@ export type ApiEndpointMinOrderByAggregateInput = {
   url?: Prisma.SortOrder
   method?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  bodyType?: Prisma.SortOrder
   expectedStatus?: Prisma.SortOrder
   timeout?: Prisma.SortOrder
   frequency?: Prisma.SortOrder
@@ -727,6 +749,7 @@ export type ApiEndpointCreateWithoutChecksInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -748,6 +771,7 @@ export type ApiEndpointUncheckedCreateWithoutChecksInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -785,6 +809,7 @@ export type ApiEndpointUpdateWithoutChecksInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -806,6 +831,7 @@ export type ApiEndpointUncheckedUpdateWithoutChecksInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -827,6 +853,7 @@ export type ApiEndpointCreateWithoutAlertsInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -848,6 +875,7 @@ export type ApiEndpointUncheckedCreateWithoutAlertsInput = {
   method?: string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: string | null
+  bodyType?: string | null
   expectedStatus?: number
   timeout?: number
   frequency?: number
@@ -885,6 +913,7 @@ export type ApiEndpointUpdateWithoutAlertsInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -906,6 +935,7 @@ export type ApiEndpointUncheckedUpdateWithoutAlertsInput = {
   method?: Prisma.StringFieldUpdateOperationsInput | string
   headers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedStatus?: Prisma.IntFieldUpdateOperationsInput | number
   timeout?: Prisma.IntFieldUpdateOperationsInput | number
   frequency?: Prisma.IntFieldUpdateOperationsInput | number
@@ -967,6 +997,7 @@ export type ApiEndpointSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   method?: boolean
   headers?: boolean
   body?: boolean
+  bodyType?: boolean
   expectedStatus?: boolean
   timeout?: boolean
   frequency?: boolean
@@ -990,6 +1021,7 @@ export type ApiEndpointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   method?: boolean
   headers?: boolean
   body?: boolean
+  bodyType?: boolean
   expectedStatus?: boolean
   timeout?: boolean
   frequency?: boolean
@@ -1010,6 +1042,7 @@ export type ApiEndpointSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   method?: boolean
   headers?: boolean
   body?: boolean
+  bodyType?: boolean
   expectedStatus?: boolean
   timeout?: boolean
   frequency?: boolean
@@ -1030,6 +1063,7 @@ export type ApiEndpointSelectScalar = {
   method?: boolean
   headers?: boolean
   body?: boolean
+  bodyType?: boolean
   expectedStatus?: boolean
   timeout?: boolean
   frequency?: boolean
@@ -1041,7 +1075,7 @@ export type ApiEndpointSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ApiEndpointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "monitorId" | "name" | "url" | "method" | "headers" | "body" | "expectedStatus" | "timeout" | "frequency" | "status" | "lastChecked" | "avgResponseTime" | "uptime" | "createdAt" | "updatedAt", ExtArgs["result"]["apiEndpoint"]>
+export type ApiEndpointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "monitorId" | "name" | "url" | "method" | "headers" | "body" | "bodyType" | "expectedStatus" | "timeout" | "frequency" | "status" | "lastChecked" | "avgResponseTime" | "uptime" | "createdAt" | "updatedAt", ExtArgs["result"]["apiEndpoint"]>
 export type ApiEndpointInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   checks?: boolean | Prisma.ApiEndpoint$checksArgs<ExtArgs>
   alerts?: boolean | Prisma.ApiEndpoint$alertsArgs<ExtArgs>
@@ -1065,6 +1099,7 @@ export type $ApiEndpointPayload<ExtArgs extends runtime.Types.Extensions.Interna
     method: string
     headers: runtime.JsonValue | null
     body: string | null
+    bodyType: string | null
     expectedStatus: number
     timeout: number
     frequency: number
@@ -1507,6 +1542,7 @@ export interface ApiEndpointFieldRefs {
   readonly method: Prisma.FieldRef<"ApiEndpoint", 'String'>
   readonly headers: Prisma.FieldRef<"ApiEndpoint", 'Json'>
   readonly body: Prisma.FieldRef<"ApiEndpoint", 'String'>
+  readonly bodyType: Prisma.FieldRef<"ApiEndpoint", 'String'>
   readonly expectedStatus: Prisma.FieldRef<"ApiEndpoint", 'Int'>
   readonly timeout: Prisma.FieldRef<"ApiEndpoint", 'Int'>
   readonly frequency: Prisma.FieldRef<"ApiEndpoint", 'Int'>

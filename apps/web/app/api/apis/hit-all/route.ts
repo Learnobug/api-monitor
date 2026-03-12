@@ -20,7 +20,12 @@ export async function POST() {
 
   let enqueued = 0;
   for (const api of apis) {
-    await enqueueApiCheckJob(api.url, api.monitorId!, "manual");
+    await enqueueApiCheckJob(api.url, api.monitorId!, "manual", {
+      method: api.method,
+      body: api.body,
+      bodyType: api.bodyType,
+      headers: api.headers,
+    });
     enqueued++;
   }
 

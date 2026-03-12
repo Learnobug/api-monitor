@@ -19,6 +19,7 @@ model ApiEndpoint {
   method          String     @default("GET")
   headers         Json?
   body            String?
+  bodyType        String?    @default("none") // "json" | "text" | "none"
   expectedStatus  Int        @default(200)
   timeout         Int        @default(5000)
   frequency       Int        @default(86400000)

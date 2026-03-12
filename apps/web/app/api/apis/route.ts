@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       method: body.method ?? "GET",
       headers: body.headers ?? undefined,
       body: body.body ?? undefined,
+      bodyType: body.bodyType ?? "none",
       expectedStatus: body.expectedStatus ?? 200,
       timeout: body.timeout ?? 5000,
       frequency: body.frequency ?? 86400000,
@@ -36,7 +37,12 @@ export async function POST(request: Request) {
   });
 
   if (api.monitorId) {
-    await enqueueApiCheckJob(api.url, api.monitorId);
+    await enqueueApiCheckJob(api.url, api.monitorId, "manual", {
+      method: api.method,
+      body: api.body,
+      bodyType: api.bodyType,
+      headers: api.headers,
+    });
   }
 
   return NextResponse.json(api, { status: 201 });

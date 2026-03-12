@@ -111,6 +111,21 @@ export default function ApiDetailsPage() {
             value={formatFrequency(api.frequency)}
           />
         </div>
+
+        {/* Request Body info */}
+        {api.bodyType && api.bodyType !== "none" && api.body && (
+          <div className="mt-5 border-t border-gray-100 pt-4">
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="text-sm font-medium text-gray-700">Request Body</h3>
+              <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono uppercase">
+                {api.bodyType}
+              </span>
+            </div>
+            <pre className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs font-mono text-gray-700 overflow-x-auto max-h-40 overflow-y-auto">
+              {api.bodyType === "json" ? (() => { try { return JSON.stringify(JSON.parse(api.body!), null, 2); } catch { return api.body; } })() : api.body}
+            </pre>
+          </div>
+        )}
       </div>
 
       {/* Response time chart */}

@@ -2,6 +2,8 @@ export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 export type ApiStatus = "healthy" | "degraded" | "down";
 
+export type BodyType = "json" | "text" | "none";
+
 export interface ApiEndpoint {
   id: string;
   monitorId?: string | null;
@@ -10,6 +12,7 @@ export interface ApiEndpoint {
   method: HttpMethod;
   headers?: Record<string, string>;
   body?: string;
+  bodyType?: BodyType;
   expectedStatus: number;
   timeout: number;
   frequency: number;

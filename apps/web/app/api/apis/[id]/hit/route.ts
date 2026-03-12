@@ -18,6 +18,11 @@ export async function POST(
   if (!api.monitorId) {
     return NextResponse.json({ error: "No monitorId configured" }, { status: 400 });
   }
-  await enqueueApiCheckJob(api.url, api.monitorId, "manual");
+  await enqueueApiCheckJob(api.url, api.monitorId, "manual", {
+    method: api.method,
+    body: api.body,
+    bodyType: api.bodyType,
+    headers: api.headers,
+  });
   return NextResponse.json({ success: true });
 }

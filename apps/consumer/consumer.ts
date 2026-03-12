@@ -15,7 +15,33 @@ consumeJobs(async (job: any) => {
   let error: string | undefined;
 
   try {
-    const res = await fetch(job.url);
+    // Build fetch options based on method and body type
+    const fetchOptions: RequestInit = {
+      method: job.method || "GET",
+    };
+
+    // Build headers
+    const headers: Record<string, string> = {};
+    if (job.headers && typeof job.headers === "object") {
+      Object.assign(headers, job.headers);
+    }
+
+    // Attach body for methods that support it
+    if (job.body && job.bodyType && job.bodyType !== "none" && ["POST", "PUT", "PATCH", "DELETE"].includes((job.method || "GET").toUpperCase())) {
+      fetchOptions.body = job.body;
+      if (job.bodyType === "json" && !headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
+      } else if (job.bodyType === "text" && !headers["Content-Type"]) {
+        headers["Content-Type"] = "text/plain";
+      }
+    }
+
+    if (Object.keys(headers).length > 0) {
+      fetchOptions.headers = headers;
+    }
+
+    console.log(`[Consumer] Fetching ${job.url} with method=${fetchOptions.method}, bodyType=${job.bodyType || "none"}`);
+    const res = await fetch(job.url, fetchOptions);
     console.log(`[Consumer] Checked ${job.url} - Status: ${res.status}`, res.ok ? "Healthy" : "Unhealthy");
     status = res.status;
     success = res.ok;

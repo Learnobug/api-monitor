@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateApi } from "../../../hooks/use-apis";
 import { verifyEndpoint } from "../../../services/api";
-import type { HttpMethod } from "../../../types/api";
+import type { HttpMethod, BodyType } from "../../../types/api";
 
 export default function CreateApiPage() {
   const router = useRouter();
@@ -14,10 +14,15 @@ export default function CreateApiPage() {
     name: "",
     url: "",
     method: "GET" as HttpMethod,
+    bodyType: "none" as BodyType,
+    body: "",
     expectedStatus: "200",
     timeout: "5000",
     frequency: "86400000",
   });
+
+  const methodSupportsBody = ["POST", "PUT", "PATCH"].includes(form.method);
+  const methodAllowsBody = ["POST", "PUT", "PATCH", "DELETE"].includes(form.method);
 
   const [verifyState, setVerifyState] = useState<{
     loading: boolean;
@@ -31,18 +36,22 @@ export default function CreateApiPage() {
   async function handleVerify() {
     if (!form.url) return;
     setVerifyState({ loading: true });
-    const result = await verifyEndpoint(form.url, form.method);
+    const bodyToSend = methodAllowsBody && form.bodyType !== "none" ? form.body : undefined;
+    const result = await verifyEndpoint(form.url, form.method, bodyToSend, form.bodyType);
     setVerifyState({ loading: false, result });
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const monitorId = generatemonitorID();
+    const bodyType = methodAllowsBody ? form.bodyType : "none";
     createApi.mutate(
       {
         name: form.name,
         url: form.url,
         method: form.method,
+        bodyType,
+        body: bodyType !== "none" ? form.body : undefined,
         expectedStatus: Number(form.expectedStatus),
         timeout: Number(form.timeout),
         frequency: Number(form.frequency),
@@ -55,7 +64,19 @@ export default function CreateApiPage() {
   }
 
   function update(field: string, value: string) {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [field]: value };
+      // Reset body fields when switching to a method that doesn't support body
+      if (field === "method" && !["POST", "PUT", "PATCH", "DELETE"].includes(value)) {
+        next.bodyType = "none" as BodyType;
+        next.body = "";
+      }
+      // Auto-set bodyType to json for POST/PUT if currently none
+      if (field === "method" && ["POST", "PUT", "PATCH"].includes(value) && prev.bodyType === "none") {
+        next.bodyType = "json" as BodyType;
+      }
+      return next;
+    });
     if (field === "url" || field === "method") {
       setVerifyState({ loading: false });
     }
@@ -150,6 +171,59 @@ export default function CreateApiPage() {
             <option value="DELETE">DELETE</option>
           </select>
         </div>
+
+        {/* Body Type & Body (shown for methods that support body) */}
+        {methodAllowsBody && (
+          <div className="space-y-3">
+            <div>
+              <label htmlFor="bodyType" className="block text-sm font-medium text-gray-700 mb-1">
+                Request Body Type
+              </label>
+              <select
+                id="bodyType"
+                value={form.bodyType}
+                onChange={(e) => update("bodyType", e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="none">None</option>
+                <option value="json">JSON</option>
+                <option value="text">Text</option>
+              </select>
+            </div>
+
+            {form.bodyType !== "none" && (
+              <div>
+                <label htmlFor="body" className="block text-sm font-medium text-gray-700 mb-1">
+                  Request Body
+                  {form.bodyType === "json" && (
+                    <span className="ml-2 text-xs text-gray-400 font-normal">Must be valid JSON</span>
+                  )}
+                </label>
+                <textarea
+                  id="body"
+                  rows={5}
+                  value={form.body}
+                  onChange={(e) => update("body", e.target.value)}
+                  placeholder={
+                    form.bodyType === "json"
+                      ? '{\n  "key": "value"\n}'
+                      : "Enter request body text..."
+                  }
+                  className={`w-full px-3 py-2 rounded-lg border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    form.bodyType === "json" && form.body
+                      ? (() => { try { JSON.parse(form.body); return "border-gray-300"; } catch { return "border-red-400"; } })()
+                      : "border-gray-300"
+                  }`}
+                />
+                {form.bodyType === "json" && form.body && (() => {
+                  try { JSON.parse(form.body); return null; } catch (e: any) {
+                    return <p className="text-xs text-red-500 mt-1">Invalid JSON: {e.message}</p>;
+                  }
+                })()}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Expected status & timeout in a row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
