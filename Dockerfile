@@ -34,6 +34,9 @@ COPY --from=builder /app/apps/web/public ./apps/web/public
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 
+# Copy node_modules for serverExternalPackages (amqplib, pg, etc.)
+COPY --from=builder /app/node_modules ./node_modules
+
 USER nextjs
 
 EXPOSE 3000

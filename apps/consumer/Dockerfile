@@ -11,6 +11,9 @@ RUN npm ci
 # Build the database package (needed at runtime for Prisma client)
 RUN npx turbo run build --filter=@repo/database
 
+ENV NODE_ENV=production
 WORKDIR /app/apps/consumer
+
+CMD ["node", "--import", "tsx", "run-all.ts"]
 
 CMD ["node", "--import", "tsx", "run-all.ts"]

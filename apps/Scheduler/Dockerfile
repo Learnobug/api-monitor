@@ -11,6 +11,9 @@ RUN npm ci
 # Build the database package (needed at runtime for Prisma client)
 RUN npx turbo run build --filter=@repo/database
 
+ENV NODE_ENV=production
 WORKDIR /app/apps/Scheduler
+
+CMD ["node", "--import", "tsx", "scheduler.ts"]
 
 CMD ["node", "--import", "tsx", "scheduler.ts"]
