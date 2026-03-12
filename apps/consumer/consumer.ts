@@ -1,8 +1,13 @@
 import { consumeJobs, publishAlertJob } from "@repo/rabbit-mq";
 import { prisma } from "@repo/database";
 
+console.log("[Consumer] Starting check consumer...");
+console.log("[Consumer] DATABASE_URL set:", !!process.env.DATABASE_URL);
+console.log("[Consumer] RABBITMQ_URL set:", !!process.env.RABBITMQ_URL);
+console.log("[Consumer] QUEUE_NAME:", process.env.QUEUE_NAME || "(default: api-monitor)");
 
 consumeJobs(async (job: any) => {
+  console.log("[Consumer] Processing job:", JSON.stringify(job));
   const start = Date.now();
 
   let status = 500;
