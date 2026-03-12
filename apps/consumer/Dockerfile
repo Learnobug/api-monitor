@@ -15,5 +15,3 @@ ENV NODE_ENV=production
 WORKDIR /app/apps/consumer
 
 CMD ["node", "--import", "tsx", "run-all.ts"]
-
-CMD ["node", "--import", "tsx", "run-all.ts"]
