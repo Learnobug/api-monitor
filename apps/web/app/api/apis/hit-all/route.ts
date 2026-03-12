@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@repo/database";
+import { auth } from "@clerk/nextjs/server";
 import { enqueueApiCheckJob } from "../../../services/radditmq";
 
 export async function POST() {
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const apis = await prisma.apiEndpoint.findMany({
-    where: { monitorId: { not: null } },
+    where: { userId, monitorId: { not: null } },
   });
 
   if (apis.length === 0) {

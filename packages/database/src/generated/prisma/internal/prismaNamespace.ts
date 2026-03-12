@@ -744,6 +744,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const ApiEndpointScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   monitorId: 'monitorId',
   name: 'name',
   url: 'url',

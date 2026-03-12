@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@repo/database";
+import { auth } from "@clerk/nextjs/server";
 import { enqueueApiCheckJob } from "../../services/radditmq";
 
 export async function GET() {
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const apis = await prisma.apiEndpoint.findMany({
+    where: { userId },
     orderBy: { createdAt: "desc" },
     include: { _count: { select: { checks: true } } },
   });
@@ -11,9 +16,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const body = await request.json();
   const api = await prisma.apiEndpoint.create({
     data: {
+      userId,
       monitorId: body.monitorId ?? undefined,
       name: body.name,
       url: body.url,

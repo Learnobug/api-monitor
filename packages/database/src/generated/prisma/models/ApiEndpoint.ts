@@ -44,6 +44,7 @@ export type ApiEndpointSumAggregateOutputType = {
 
 export type ApiEndpointMinAggregateOutputType = {
   id: string | null
+  userId: string | null
   monitorId: string | null
   name: string | null
   url: string | null
@@ -62,6 +63,7 @@ export type ApiEndpointMinAggregateOutputType = {
 
 export type ApiEndpointMaxAggregateOutputType = {
   id: string | null
+  userId: string | null
   monitorId: string | null
   name: string | null
   url: string | null
@@ -80,6 +82,7 @@ export type ApiEndpointMaxAggregateOutputType = {
 
 export type ApiEndpointCountAggregateOutputType = {
   id: number
+  userId: number
   monitorId: number
   name: number
   url: number
@@ -117,6 +120,7 @@ export type ApiEndpointSumAggregateInputType = {
 
 export type ApiEndpointMinAggregateInputType = {
   id?: true
+  userId?: true
   monitorId?: true
   name?: true
   url?: true
@@ -135,6 +139,7 @@ export type ApiEndpointMinAggregateInputType = {
 
 export type ApiEndpointMaxAggregateInputType = {
   id?: true
+  userId?: true
   monitorId?: true
   name?: true
   url?: true
@@ -153,6 +158,7 @@ export type ApiEndpointMaxAggregateInputType = {
 
 export type ApiEndpointCountAggregateInputType = {
   id?: true
+  userId?: true
   monitorId?: true
   name?: true
   url?: true
@@ -259,6 +265,7 @@ export type ApiEndpointGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type ApiEndpointGroupByOutputType = {
   id: string
+  userId: string
   monitorId: string | null
   name: string
   url: string
@@ -301,6 +308,7 @@ export type ApiEndpointWhereInput = {
   OR?: Prisma.ApiEndpointWhereInput[]
   NOT?: Prisma.ApiEndpointWhereInput | Prisma.ApiEndpointWhereInput[]
   id?: Prisma.StringFilter<"ApiEndpoint"> | string
+  userId?: Prisma.StringFilter<"ApiEndpoint"> | string
   monitorId?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
   name?: Prisma.StringFilter<"ApiEndpoint"> | string
   url?: Prisma.StringFilter<"ApiEndpoint"> | string
@@ -322,6 +330,7 @@ export type ApiEndpointWhereInput = {
 
 export type ApiEndpointOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   monitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -346,6 +355,7 @@ export type ApiEndpointWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ApiEndpointWhereInput | Prisma.ApiEndpointWhereInput[]
   OR?: Prisma.ApiEndpointWhereInput[]
   NOT?: Prisma.ApiEndpointWhereInput | Prisma.ApiEndpointWhereInput[]
+  userId?: Prisma.StringFilter<"ApiEndpoint"> | string
   monitorId?: Prisma.StringNullableFilter<"ApiEndpoint"> | string | null
   name?: Prisma.StringFilter<"ApiEndpoint"> | string
   url?: Prisma.StringFilter<"ApiEndpoint"> | string
@@ -367,6 +377,7 @@ export type ApiEndpointWhereUniqueInput = Prisma.AtLeast<{
 
 export type ApiEndpointOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   monitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -394,6 +405,7 @@ export type ApiEndpointScalarWhereWithAggregatesInput = {
   OR?: Prisma.ApiEndpointScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ApiEndpointScalarWhereWithAggregatesInput | Prisma.ApiEndpointScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ApiEndpoint"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"ApiEndpoint"> | string
   monitorId?: Prisma.StringNullableWithAggregatesFilter<"ApiEndpoint"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"ApiEndpoint"> | string
   url?: Prisma.StringWithAggregatesFilter<"ApiEndpoint"> | string
@@ -413,6 +425,7 @@ export type ApiEndpointScalarWhereWithAggregatesInput = {
 
 export type ApiEndpointCreateInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -434,6 +447,7 @@ export type ApiEndpointCreateInput = {
 
 export type ApiEndpointUncheckedCreateInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -455,6 +469,7 @@ export type ApiEndpointUncheckedCreateInput = {
 
 export type ApiEndpointUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -476,6 +491,7 @@ export type ApiEndpointUpdateInput = {
 
 export type ApiEndpointUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -497,6 +513,7 @@ export type ApiEndpointUncheckedUpdateInput = {
 
 export type ApiEndpointCreateManyInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -516,6 +533,7 @@ export type ApiEndpointCreateManyInput = {
 
 export type ApiEndpointUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -535,6 +553,7 @@ export type ApiEndpointUpdateManyMutationInput = {
 
 export type ApiEndpointUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -554,6 +573,7 @@ export type ApiEndpointUncheckedUpdateManyInput = {
 
 export type ApiEndpointCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   monitorId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -581,6 +601,7 @@ export type ApiEndpointAvgOrderByAggregateInput = {
 
 export type ApiEndpointMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   monitorId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -599,6 +620,7 @@ export type ApiEndpointMaxOrderByAggregateInput = {
 
 export type ApiEndpointMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   monitorId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -698,6 +720,7 @@ export type ApiEndpointUpdateOneRequiredWithoutAlertsNestedInput = {
 
 export type ApiEndpointCreateWithoutChecksInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -718,6 +741,7 @@ export type ApiEndpointCreateWithoutChecksInput = {
 
 export type ApiEndpointUncheckedCreateWithoutChecksInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -754,6 +778,7 @@ export type ApiEndpointUpdateToOneWithWhereWithoutChecksInput = {
 
 export type ApiEndpointUpdateWithoutChecksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -774,6 +799,7 @@ export type ApiEndpointUpdateWithoutChecksInput = {
 
 export type ApiEndpointUncheckedUpdateWithoutChecksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -794,6 +820,7 @@ export type ApiEndpointUncheckedUpdateWithoutChecksInput = {
 
 export type ApiEndpointCreateWithoutAlertsInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -814,6 +841,7 @@ export type ApiEndpointCreateWithoutAlertsInput = {
 
 export type ApiEndpointUncheckedCreateWithoutAlertsInput = {
   id?: string
+  userId: string
   monitorId?: string | null
   name: string
   url: string
@@ -850,6 +878,7 @@ export type ApiEndpointUpdateToOneWithWhereWithoutAlertsInput = {
 
 export type ApiEndpointUpdateWithoutAlertsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -870,6 +899,7 @@ export type ApiEndpointUpdateWithoutAlertsInput = {
 
 export type ApiEndpointUncheckedUpdateWithoutAlertsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   monitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -930,6 +960,7 @@ export type ApiEndpointCountOutputTypeCountAlertsArgs<ExtArgs extends runtime.Ty
 
 export type ApiEndpointSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   monitorId?: boolean
   name?: boolean
   url?: boolean
@@ -952,6 +983,7 @@ export type ApiEndpointSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type ApiEndpointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   monitorId?: boolean
   name?: boolean
   url?: boolean
@@ -971,6 +1003,7 @@ export type ApiEndpointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type ApiEndpointSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   monitorId?: boolean
   name?: boolean
   url?: boolean
@@ -990,6 +1023,7 @@ export type ApiEndpointSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type ApiEndpointSelectScalar = {
   id?: boolean
+  userId?: boolean
   monitorId?: boolean
   name?: boolean
   url?: boolean
@@ -1007,7 +1041,7 @@ export type ApiEndpointSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ApiEndpointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "monitorId" | "name" | "url" | "method" | "headers" | "body" | "expectedStatus" | "timeout" | "frequency" | "status" | "lastChecked" | "avgResponseTime" | "uptime" | "createdAt" | "updatedAt", ExtArgs["result"]["apiEndpoint"]>
+export type ApiEndpointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "monitorId" | "name" | "url" | "method" | "headers" | "body" | "expectedStatus" | "timeout" | "frequency" | "status" | "lastChecked" | "avgResponseTime" | "uptime" | "createdAt" | "updatedAt", ExtArgs["result"]["apiEndpoint"]>
 export type ApiEndpointInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   checks?: boolean | Prisma.ApiEndpoint$checksArgs<ExtArgs>
   alerts?: boolean | Prisma.ApiEndpoint$alertsArgs<ExtArgs>
@@ -1024,6 +1058,7 @@ export type $ApiEndpointPayload<ExtArgs extends runtime.Types.Extensions.Interna
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    userId: string
     monitorId: string | null
     name: string
     url: string
@@ -1465,6 +1500,7 @@ export interface Prisma__ApiEndpointClient<T, Null = never, ExtArgs extends runt
  */
 export interface ApiEndpointFieldRefs {
   readonly id: Prisma.FieldRef<"ApiEndpoint", 'String'>
+  readonly userId: Prisma.FieldRef<"ApiEndpoint", 'String'>
   readonly monitorId: Prisma.FieldRef<"ApiEndpoint", 'String'>
   readonly name: Prisma.FieldRef<"ApiEndpoint", 'String'>
   readonly url: Prisma.FieldRef<"ApiEndpoint", 'String'>

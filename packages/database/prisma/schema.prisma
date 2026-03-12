@@ -12,6 +12,7 @@ datasource db {
 
 model ApiEndpoint {
   id              String     @id @default(cuid())
+  userId          String
   monitorId       String?
   name            String
   url             String
@@ -31,6 +32,7 @@ model ApiEndpoint {
   checks ApiCheck[]
   alerts Alert[]
 
+  @@index([userId])
   @@map("api_endpoints")
 }
 
