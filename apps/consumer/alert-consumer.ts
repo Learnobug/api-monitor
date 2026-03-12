@@ -7,7 +7,9 @@ const mailjet = Mailjet.apiConnect(
   process.env.MJ_APIKEY_PRIVATE!,
 );
 
-console.log("Alert consumer starting...");
+console.log("[AlertConsumer] Starting alert consumer...");
+console.log("[AlertConsumer] MJ_APIKEY_PUBLIC set:", !!process.env.MJ_APIKEY_PUBLIC);
+console.log("[AlertConsumer] MJ_APIKEY_PRIVATE set:", !!process.env.MJ_APIKEY_PRIVATE);
 
 consumeAlertJobs(async (job: any) => {
   const { alertId, checkId, email, apiName, apiUrl, status, error } = job;

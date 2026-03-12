@@ -11,8 +11,13 @@ function createPrismaClient() {
   if (!connectionString) {
     throw new Error("DATABASE_URL environment variable is not set");
   }
+  // Strip sslmode from the connection string — we configure SSL explicitly
+  // This prevents the pg-connection-string security warning
+  const cleanedUrl = connectionString.replace(/[?&]sslmode=[^&]*/gi, (match) =>
+    match.startsWith("?") ? "?" : ""
+  ).replace(/\?$/, "");
   const pool = new pg.Pool({
-    connectionString,
+    connectionString: cleanedUrl,
     ssl: { rejectUnauthorized: false },
   });
   const adapter = new PrismaPg(pool);

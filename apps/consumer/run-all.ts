@@ -1,3 +1,10 @@
+process.on("uncaughtException", (err) => {
+  console.error("[run-all] UNCAUGHT EXCEPTION:", err);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("[run-all] UNHANDLED REJECTION:", reason);
+});
+
 console.log("[run-all] Starting all consumers...");
 console.log("[run-all] NODE_ENV:", process.env.NODE_ENV);
 console.log("[run-all] Env vars present: DATABASE_URL=%s, RABBITMQ_URL=%s, QUEUE_NAME=%s, ALERT_QUEUE_NAME=%s",

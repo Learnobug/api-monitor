@@ -16,25 +16,28 @@ consumeJobs(async (job: any) => {
 
   try {
     const res = await fetch(job.url);
-    console.log(`Checked ${job.url} - Status: ${res.status}`, res.ok ? "Healthy" : "Unhealthy");
+    console.log(`[Consumer] Checked ${job.url} - Status: ${res.status}`, res.ok ? "Healthy" : "Unhealthy");
     status = res.status;
     success = res.ok;
   } catch (err: any) {
-    console.log("API failed");
+    console.error("[Consumer] API fetch failed:", err?.message ?? err);
     error = err?.message ?? "Unknown error";
   }
 
   const responseTime = Date.now() - start;
+  console.log(`[Consumer] Response time: ${responseTime}ms`);
 
   // Look up the endpoint by monitorId
+  console.log(`[Consumer] Looking up endpoint with monitorId: ${job.monitorID}`);
   const endpoint = await prisma.apiEndpoint.findFirst({
     where: { monitorId: job.monitorID },
   });
 
   if (!endpoint) {
-    console.error(`No endpoint found for monitorId: ${job.monitorID}`);
+    console.error(`[Consumer] No endpoint found for monitorId: ${job.monitorID}`);
     return;
   }
+  console.log(`[Consumer] Found endpoint: ${endpoint.name} (id: ${endpoint.id})`);
 
   const check = await prisma.apiCheck.create({
     data: {
@@ -47,6 +50,7 @@ consumeJobs(async (job: any) => {
     },
   });
 
+  console.log(`[Consumer] Created check record: ${check.id}`);
   console.log(`Saved check result for ${endpoint.name} (monitorId: ${job.monitorID})`);
 
   // Recompute aggregate stats for this endpoint
