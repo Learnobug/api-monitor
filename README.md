@@ -5,7 +5,7 @@ A full-stack, real-time **API monitoring application** built as a Turborepo mono
 --- 
 
 ## Architecture 
-
+ 
 ![Architecture Diagram](./architecture.png)
 
 The system follows an **event-driven, queue-based architecture** with clear separation of concerns:
