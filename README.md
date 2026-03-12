@@ -4,7 +4,7 @@ A full-stack, real-time **API monitoring application** built as a Turborepo mono
 
 --- 
 
-## Architecture
+## Architecture 
 
 ![Architecture Diagram](./architecture.png)
 
