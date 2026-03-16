@@ -112,6 +112,21 @@ export default function ApiDetailsPage() {
           />
         </div>
 
+        {/* Request Headers info */}
+        {api.headers && Object.keys(api.headers).length > 0 && (
+          <div className="mt-5 border-t border-gray-100 pt-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-2">Request Headers</h3>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+              {Object.entries(api.headers as Record<string, string>).map(([key, value]) => (
+                <div key={key} className="flex text-xs font-mono border-b border-gray-100 last:border-0">
+                  <span className="px-3 py-2 text-gray-500 bg-gray-100 border-r border-gray-200 w-48 shrink-0 truncate">{key}</span>
+                  <span className="px-3 py-2 text-gray-700 break-all">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Request Body info */}
         {api.bodyType && api.bodyType !== "none" && api.body && (
           <div className="mt-5 border-t border-gray-100 pt-4">

@@ -83,12 +83,13 @@ export async function verifyEndpoint(
   url: string,
   method: string,
   body?: string,
-  bodyType?: string
+  bodyType?: string,
+  headers?: Record<string, string>
 ): Promise<{ reachable: boolean; status?: number; statusText?: string; error?: string }> {
   const res = await fetch("/api/apis/verify", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url, method, body, bodyType }),
+    body: JSON.stringify({ url, method, body, bodyType, headers }),
   });
   return res.json();
 }

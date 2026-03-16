@@ -21,6 +21,31 @@ export default function CreateApiPage() {
     frequency: "86400000",
   });
 
+  const [headers, setHeaders] = useState<{ key: string; value: string }[]>([]);
+
+  function addHeader() {
+    setHeaders((prev) => [...prev, { key: "", value: "" }]);
+  }
+
+  function updateHeader(index: number, field: "key" | "value", val: string) {
+    setHeaders((prev) =>
+      prev.map((h, i) => (i === index ? { ...h, [field]: val } : h))
+    );
+  }
+
+  function removeHeader(index: number) {
+    setHeaders((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  function buildHeadersRecord(): Record<string, string> | undefined {
+    const entries = headers.filter((h) => h.key.trim());
+    if (entries.length === 0) return undefined;
+    return entries.reduce<Record<string, string>>((acc, h) => {
+      acc[h.key.trim()] = h.value;
+      return acc;
+    }, {});
+  }
+
   const methodSupportsBody = ["POST", "PUT", "PATCH"].includes(form.method);
   const methodAllowsBody = ["POST", "PUT", "PATCH", "DELETE"].includes(form.method);
 
@@ -37,7 +62,7 @@ export default function CreateApiPage() {
     if (!form.url) return;
     setVerifyState({ loading: true });
     const bodyToSend = methodAllowsBody && form.bodyType !== "none" ? form.body : undefined;
-    const result = await verifyEndpoint(form.url, form.method, bodyToSend, form.bodyType);
+    const result = await verifyEndpoint(form.url, form.method, bodyToSend, form.bodyType, buildHeadersRecord());
     setVerifyState({ loading: false, result });
   }
 
@@ -50,6 +75,7 @@ export default function CreateApiPage() {
         name: form.name,
         url: form.url,
         method: form.method,
+        headers: buildHeadersRecord(),
         bodyType,
         body: bodyType !== "none" ? form.body : undefined,
         expectedStatus: Number(form.expectedStatus),
@@ -170,6 +196,55 @@ export default function CreateApiPage() {
             <option value="PATCH">PATCH</option>
             <option value="DELETE">DELETE</option>
           </select>
+        </div>
+
+        {/* Request Headers */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Request Headers
+              <span className="ml-2 text-xs text-gray-400 font-normal">Optional</span>
+            </label>
+            <button
+              type="button"
+              onClick={addHeader}
+              className="text-xs font-medium text-indigo-600 hover:text-indigo-700"
+            >
+              + Add Header
+            </button>
+          </div>
+          {headers.length === 0 ? (
+            <p className="text-xs text-gray-400 italic">No custom headers</p>
+          ) : (
+            <div className="space-y-2">
+              {headers.map((h, i) => (
+                <div key={i} className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    value={h.key}
+                    onChange={(e) => updateHeader(i, "key", e.target.value)}
+                    placeholder="Header name"
+                    className="flex-1 px-3 py-1.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                  <input
+                    type="text"
+                    value={h.value}
+                    onChange={(e) => updateHeader(i, "value", e.target.value)}
+                    placeholder="Value"
+                    className="flex-1 px-3 py-1.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeHeader(i)}
+                    className="text-gray-400 hover:text-red-500 transition-colors text-lg leading-none px-1"
+                    aria-label="Remove header"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Body Type & Body (shown for methods that support body) */}
